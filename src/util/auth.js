@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
+import config from "../config.js";
 
-const jwtsecretkey = process.env.JWT_SECRET_KEY || "dklsfjdklfjskfjesldf";
+const jwtsecretkey = config.jwt.secret || "dklsfjdklfjskfjesldf";
+const jwt_expiration_time = config.jwt.expiresIn || "1d";
 
 export const generateToken = (user) => {
   return jwt.sign(
@@ -9,7 +11,7 @@ export const generateToken = (user) => {
     },
     jwtsecretkey,
     {
-      expiresIn: "1d",
+      expiresIn: jwt_expiration_time,
     }
   );
 };
@@ -20,14 +22,14 @@ export const authenticate = (req, res, next) => {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
     jwt.verify(token, jwtsecretkey, (err, decode) => {
       if (err) {
-        res.status(401).send({ message: "Invalid Token" });
+        res.status(401).send({ message: "Invalid Token, Not Authorized" });
       } else {
         req.user = decode;
         next();
       }
     });
   } else {
-    res.status(401).send({ message: "No Token" });
+    res.status(401).send({ message: "No Auth Token provided" });
   }
 };
 
