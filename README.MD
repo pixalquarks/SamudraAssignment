@@ -34,7 +34,7 @@ npm run dev
 
 ### Protected Endpoints (must provide a valid jwt in request headers-Authentication)
 
-`/patchjson` - A POST endpoints, takes json body with json object and patch object, returns patched json object.
+`/patchjson` - A POST endpoint, takes json body with json object and patch object, returns patched json object.
 
 `/createthumbnail` - A GET endpoint, takes a url query parameter (url of the image), returns a thumbnail image of the same of size 50x50
 
