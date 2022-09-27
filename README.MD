@@ -38,4 +38,4 @@ npm run dev
 
 `/createthumbnail` - A GET endpoint, takes a url query parameter (url of the image), returns a thumbnail image of the same of size 50x50
 
-`/saveaddress` - A Post endpoint, takes json body with address parameter and creates and entry for the user with address.
+`/adduseraddress` - A Post endpoint, takes json body with address parameter and creates and entry for the user with address.
