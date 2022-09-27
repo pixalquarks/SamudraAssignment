@@ -33,13 +33,11 @@ const sleep = (milliseconds) => {
 
 app.get("/createthumbnail", authenticate, async (req, res) => {
   const url = req.query.url;
-  console.log(url);
   if (!url) {
     res.status(400).send({ message: "Missing url" });
   } else {
     try {
       await createThumbnail(url, 50, 50);
-      console.log("done creting thumbnail");
       await sleep(500);
       res.status(200).download(process.cwd() + "\\thumbnail.jpeg", (err) => {
         console.log("error" + err);
@@ -54,7 +52,6 @@ app.get("/createthumbnail", authenticate, async (req, res) => {
 app.post("/patchjson", authenticate, (req, res) => {
   const json = req.body.json;
   const patch = req.body.patch;
-  console.log(json, patch);
   if (!json || !patch) {
     res.status(400).send({ message: "Missing json or patch" });
   } else {
